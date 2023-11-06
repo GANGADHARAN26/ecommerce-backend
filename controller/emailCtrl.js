@@ -10,8 +10,8 @@ const sendEmail=asyncHandler(async(data,req,res)=>{
     port: 587,
     secure: false,
     auth: {
-      user: 'gangadharana01@gmail.com',
-      pass: 'moutcnnagdjyuobq'
+      user: process.env.NODEMAILER_USER,
+      pass: process.env.NODEMAILER_PASS
     }
   });
   

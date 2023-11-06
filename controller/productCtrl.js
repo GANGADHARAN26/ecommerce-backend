@@ -2,6 +2,7 @@ const { request } = require("express");
 const Product = require("../models/productModel");
 const asyncHandler = require("express-async-handler");
 const slugify = require("slugify");
+const validateMongoDbId=require("../utils/validateMongoDbId.js")
 const createProduct = asyncHandler(async (req, res) => {
   try {
     if (req.body.title) {
@@ -16,15 +17,18 @@ const createProduct = asyncHandler(async (req, res) => {
 
 const getaProduct = asyncHandler(async (req, res) => {
   const { id } = req.params;
+  validateMongoDbId(id)
+
   try {
-    const findProduct = await Product.findById(id);
+    const findProduct = await Product.findById(id);  
     res.json(findProduct);
   } catch (error) {
-    throw new Error(error);
+    throw new Error(error);   
   }
 });
 const updateProduct = asyncHandler(async (req, res) => {
   const { id } = req.params;
+  validateMongoDbId(id)
   try {
     if (req.body.title) {
       req.body.slug = slugify(req.body.title);
@@ -42,6 +46,8 @@ const updateProduct = asyncHandler(async (req, res) => {
 });
 const deleteProduct = asyncHandler(async (req, res) => {
   const { id } = req.params;
+  validateMongoDbId(id)
+
   try {
     const deleteProduct = await Product.findOneAndDelete(id);
     res.json(deleteProduct);
