@@ -30,14 +30,11 @@ var blogSchema = new mongoose.Schema({
         type:mongoose.Schema.Types.ObjectId,
         ref:"User"
     },
-    diskikes:{
+    dislikes:{
         type:mongoose.Schema.Types.ObjectId,
         ref:"User"
     },
-    images:{
-        type:String,
-        default:"https://thumbs.dreamstime.com/z/blog-information-website-concept-workplace-background-text-view-above-127465079.jpg?w=992"
-    },
+    images:[],
     author:{
         type:String,
         default:"Admin",
